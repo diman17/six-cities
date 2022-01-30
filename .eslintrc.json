@@ -16,6 +16,9 @@
   "rules": {
     "jsx-a11y/anchor-is-valid": 0,
     "jsx-a11y/no-noninteractive-tabindex": 0,
+    "jsx-a11y/img-redundant-alt": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "no-undef": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".tsx"] }],
     "import/extensions": [2, { "tsx": "never" }]
   }
