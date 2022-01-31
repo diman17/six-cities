@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Header(): JSX.Element {
   return (
@@ -12,17 +13,22 @@ export default function Header(): JSX.Element {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <li className="header__nav-item user">
+              <li className="header__nav-item">
+                <Link className="header__nav-link" to="/login">
+                  <span className="header__signout">Sign in</span>
+                </Link>
+              </li>
+              {/* <li className="header__nav-item user">
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper" />
                   <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                 </a>
-              </li>
-              <li className="header__nav-item">
+              </li> */}
+              {/* <li className="header__nav-item">
                 <a className="header__nav-link" href="#">
                   <span className="header__signout">Sign out</span>
                 </a>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>
