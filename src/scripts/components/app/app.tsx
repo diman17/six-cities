@@ -5,11 +5,19 @@ import LoginPage from '../login-page/login-page';
 import MainPage from '../main-page/main-page';
 import PropertyPage from '../property-page/property-page';
 
-export default function App(): JSX.Element {
+import type { Offers } from '../../mocks/offers';
+
+type AppProps = {
+  offers: Offers;
+};
+
+export default function App(props: AppProps): JSX.Element {
+  const { offers } = props;
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPage offers={offers} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/offer/:id" element={<PropertyPage />} />
