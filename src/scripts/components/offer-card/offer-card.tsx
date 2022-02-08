@@ -4,14 +4,20 @@ import type { Offer } from '../../mocks/offers';
 
 type OfferCardProps = {
   offer: Offer;
+  handleOfferMouseEnter: (offer: Offer) => void;
+  handleOfferMouseLeave: () => void;
 };
 
 export default function OfferCard(props: OfferCardProps): JSX.Element {
-  const { offer } = props;
+  const { offer, handleOfferMouseEnter, handleOfferMouseLeave } = props;
   const { isPremium, image, price, isFavorite, rating, name, type } = offer;
 
   return (
-    <article className="cities__place-card place-card">
+    <article
+      className="cities__place-card place-card"
+      onMouseEnter={() => handleOfferMouseEnter(offer)}
+      onMouseLeave={() => handleOfferMouseLeave()}
+    >
       {isPremium || (
         <div className="place-card__mark">
           <span>Premium</span>

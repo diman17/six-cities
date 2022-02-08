@@ -3,7 +3,13 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb", "plugin:import/typescript", "plugin:react/recommended", "prettier"],
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:react/recommended",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
