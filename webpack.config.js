@@ -59,5 +59,6 @@ module.exports = {
     compress: true,
     host: 'local-ipv4',
     port: 3000,
+    historyApiFallback: true,
   },
 };

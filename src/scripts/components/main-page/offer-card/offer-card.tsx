@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Offer } from '../../mocks/offers';
+import type { Offer } from '../../../mocks/offers';
 
 type OfferCardProps = {
   offer: Offer;

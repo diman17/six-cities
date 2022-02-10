@@ -18,9 +18,9 @@ export default function App(props: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage offers={offers} />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="/offer/:id" element={<PropertyPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="favorites" element={<FavoritesPage offers={offers} />} />
+        <Route path="offer/:id" element={<PropertyPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../header/header';
-import OfferCardList from '../offer-card-list/offer-card-list';
+import OfferCardList from './offer-card-list/offer-card-list';
 
 import type { Offers } from '../../mocks/offers';
 
