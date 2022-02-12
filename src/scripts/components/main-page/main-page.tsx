@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from '../header/header';
 import OfferCardList from './offer-card-list/offer-card-list';
-
-import type { Offers } from '../../mocks/offers';
+import { Offers } from '../../mocks/offers';
+import Map from './map/map';
+import { getOffersCity } from '../../utils/common';
 
 type MainPageProps = {
   offers: Offers;
@@ -10,6 +11,9 @@ type MainPageProps = {
 
 export default function MainPage(props: MainPageProps): JSX.Element {
   const { offers } = props;
+
+  const currentCity = 'Amsterdam';
+  const offersCity = getOffersCity(currentCity, offers);
 
   return (
     <div className="page page--gray page--main">
@@ -56,7 +60,9 @@ export default function MainPage(props: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">
+                {offersCity.length} places to stay in {currentCity}
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -80,10 +86,12 @@ export default function MainPage(props: MainPageProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <OfferCardList offers={offers} />
+              <OfferCardList offers={offersCity} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map offers={offersCity} city={offersCity[0].city} />
+              </section>
             </div>
           </div>
         </div>
