@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import Leaflet, { LatLngExpression } from 'leaflet';
-
-import type { Offers } from '../../../mocks/offers';
+import React, { useEffect, useRef } from 'react';
+import { Icon, LatLngExpression, Marker } from 'leaflet';
+import { HoveredOffer, Offers } from '../../../types/types';
+import useMap from '../../../hooks/useMap';
 
 type MapProps = {
   offers: Offers;
@@ -9,30 +9,34 @@ type MapProps = {
     name: string;
     location: number[];
   };
+  hoveredOffer: HoveredOffer;
 };
 
 export default function Map(props: MapProps): JSX.Element {
-  const { offers, city } = props;
+  const { offers, city, hoveredOffer } = props;
 
-  const cityLocation = city.location as LatLngExpression;
+  const mapRef = useRef(null);
+  const map = useMap(mapRef, city.location);
 
   useEffect(() => {
-    const map = Leaflet.map('map').setView(cityLocation, 12);
+    if (map) {
+      const defaultIcon = new Icon({
+        iconUrl: '../../img/pin.svg',
+        iconSize: [30, 30],
+      });
 
-    const defaultIcon = Leaflet.icon({
-      iconUrl: '../../img/pin.svg',
-      iconSize: [30, 30],
-    });
+      const activeIcon = new Icon({
+        iconUrl: '../../img/pin-active.svg',
+        iconSize: [30, 30],
+      });
 
-    Leaflet.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    }).addTo(map);
+      offers.forEach((offer) => {
+        if (hoveredOffer?.id === offer.id)
+          new Marker(offer.location as LatLngExpression, { icon: activeIcon }).addTo(map);
+        else new Marker(offer.location as LatLngExpression, { icon: defaultIcon }).addTo(map);
+      });
+    }
+  }, [map, hoveredOffer]);
 
-    offers.forEach((offer) => {
-      Leaflet.marker(offer.location as LatLngExpression, { icon: defaultIcon }).addTo(map);
-    });
-  });
-
-  return <div id="map" style={{ height: '100%' }} />;
+  return <div ref={mapRef} style={{ height: '100%' }} />;
 }

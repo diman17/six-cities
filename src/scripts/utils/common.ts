@@ -1,4 +1,4 @@
-import type { Offers } from '../mocks/offers';
+import { Offers } from '../types/types';
 
 export type FavoriteOffersByCity = {
   [key: string]: {

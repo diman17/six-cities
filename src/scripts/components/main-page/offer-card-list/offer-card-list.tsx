@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import OfferCard from '../offer-card/offer-card';
-
-import type { Offer, Offers } from '../../../mocks/offers';
+import { HoveredOffer, Offer, Offers } from '../../../types/types';
 
 type OfferCardListProps = {
   offers: Offers;
+  setHoveredOffer: (hoveredOffer: HoveredOffer) => void;
 };
 
-type HoveredOffer = null | Offer;
-
 export default function OfferList(props: OfferCardListProps): JSX.Element {
-  const { offers } = props;
-
-  const [hoveredOffer, setHoveredOffer] = useState<HoveredOffer>(null);
+  const { offers, setHoveredOffer } = props;
 
   const handleOfferMouseEnter = (offer: Offer): void => {
     setHoveredOffer(offer);

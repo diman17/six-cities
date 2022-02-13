@@ -2,8 +2,7 @@ import React from 'react';
 import Header from '../header/header';
 import OfferCardsByCity from './offer-cards-by-city/offer-cards-by-city';
 import { getFavoriteOffersByCity } from '../../utils/common';
-
-import type { Offers } from '../../mocks/offers';
+import { Offers } from '../../types/types';
 
 type FavoritesPageProps = {
   offers: Offers;

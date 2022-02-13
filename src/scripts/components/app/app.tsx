@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Offers } from '../../types/types';
 import FavoritesPage from '../favorites-page/favorites-page';
 import LoginPage from '../login-page/login-page';
 import MainPage from '../main-page/main-page';
 import PropertyPage from '../property-page/property-page';
-
-import type { Offers } from '../../mocks/offers';
 
 type AppProps = {
   offers: Offers;

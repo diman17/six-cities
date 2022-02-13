@@ -1,7 +1,6 @@
 import React from 'react';
+import { Offers } from '../../../types/types';
 import OfferCard from '../offer-card/offer-card';
-
-import type { Offers } from '../../../mocks/offers';
 
 type OfferCardsByCityProps = {
   favoriteOffers: {

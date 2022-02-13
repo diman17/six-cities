@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../header/header';
 import OfferCardList from './offer-card-list/offer-card-list';
-import { Offers } from '../../mocks/offers';
+import { HoveredOffer, Offers } from '../../types/types';
 import Map from './map/map';
 import { getOffersCity } from '../../utils/common';
 
@@ -14,6 +14,8 @@ export default function MainPage(props: MainPageProps): JSX.Element {
 
   const currentCity = 'Amsterdam';
   const offersCity = getOffersCity(currentCity, offers);
+
+  const [hoveredOffer, setHoveredOffer] = useState<HoveredOffer>(null);
 
   return (
     <div className="page page--gray page--main">
@@ -86,11 +88,11 @@ export default function MainPage(props: MainPageProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <OfferCardList offers={offersCity} />
+              <OfferCardList offers={offersCity} setHoveredOffer={setHoveredOffer} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offersCity} city={offersCity[0].city} />
+                <Map offers={offersCity} city={offersCity[0].city} hoveredOffer={hoveredOffer} />
               </section>
             </div>
           </div>

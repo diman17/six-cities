@@ -1,22 +1,4 @@
-export type Offer = {
-  id: number;
-  city: {
-    name: string;
-    location: number[];
-  };
-  isPremium: boolean;
-  image: string;
-  price: number;
-  isFavorite: boolean;
-  rating: number;
-  name: string;
-  type: string;
-  location: number[];
-};
-
-export type Offers = Offer[];
-
-export const offers: Offers = [
+export default [
   {
     id: Date.now() + Math.random(),
     city: {
@@ -75,7 +57,7 @@ export const offers: Offers = [
     rating: 80,
     name: 'Canal View Prinsengrach',
     type: 'Apartment',
-    location: [52.37737543514637, 4.826915570441372],
+    location: [52.35872927064837, 4.862428191595632],
   },
   {
     id: Date.now() + Math.random(),
