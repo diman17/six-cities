@@ -1,15 +1,15 @@
 import React from 'react';
-import { Offers } from '../../../types/types';
-import OfferCard from '../offer-card/offer-card';
+import { Offers } from '../types/types';
+import FavoritesCard from './favorites-card';
 
-type OfferCardsByCityProps = {
+type FavoritesListByCityProps = {
   favoriteOffers: {
     cityName: string;
     offers: Offers;
   };
 };
 
-export default function OfferCardsByCity(props: OfferCardsByCityProps) {
+export default function FavoritesListByCity(props: FavoritesListByCityProps) {
   const { favoriteOffers } = props;
   const { cityName, offers } = favoriteOffers;
 
@@ -24,7 +24,7 @@ export default function OfferCardsByCity(props: OfferCardsByCityProps) {
       </div>
       <div className="favorites__places">
         {offers.map((offer) => (
-          <OfferCard key={offer.id} offer={offer} />
+          <FavoritesCard key={offer.id} offer={offer} />
         ))}
       </div>
     </li>

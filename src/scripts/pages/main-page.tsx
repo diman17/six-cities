@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Header from '../header/header';
-import OfferCardList from './offer-card-list/offer-card-list';
-import { HoveredOffer, Offers } from '../../types/types';
-import Map from './map/map';
-import { getOffersCity } from '../../utils/common';
+import Header from '../components/header';
+import { HoveredOffer, Offer, Offers } from '../types/types';
+import Map from '../components/map';
+import { getOffersCity } from '../utils/common';
+import Card from '../components/card';
 
 type MainPageProps = {
   offers: Offers;
@@ -16,6 +16,14 @@ export default function MainPage(props: MainPageProps): JSX.Element {
   const offersCity = getOffersCity(currentCity, offers);
 
   const [hoveredOffer, setHoveredOffer] = useState<HoveredOffer>(null);
+
+  const handleOfferMouseEnter = (offer: Offer): void => {
+    setHoveredOffer(offer);
+  };
+
+  const handleOfferMouseLeave = (): void => {
+    setHoveredOffer(null);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -88,7 +96,18 @@ export default function MainPage(props: MainPageProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <OfferCardList offers={offersCity} setHoveredOffer={setHoveredOffer} />
+              <div className="cities__places-list places__list tabs__content">
+                {offersCity.map(
+                  (offer): JSX.Element => (
+                    <Card
+                      key={offer.id}
+                      offer={offer}
+                      handleOfferMouseEnter={handleOfferMouseEnter}
+                      handleOfferMouseLeave={handleOfferMouseLeave}
+                    />
+                  ),
+                )}
+              </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

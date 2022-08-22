@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { Offers } from '../../types/types';
-import FavoritesPage from '../favorites-page/favorites-page';
-import LoginPage from '../login-page/login-page';
-import MainPage from '../main-page/main-page';
-import PropertyPage from '../property-page/property-page';
+import { Offers } from './types/types';
+import FavoritesPage from './pages/favorites-page';
+import LoginPage from './pages/login-page';
+import MainPage from './pages/main-page';
+import PropertyPage from './pages/property-page';
 
 type AppProps = {
   offers: Offers;

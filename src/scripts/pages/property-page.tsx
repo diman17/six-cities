@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../header/header';
+import Header from '../components/header';
 
 export default function PropertyPage(): JSX.Element {
   return (

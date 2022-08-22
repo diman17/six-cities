@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../header/header';
-import OfferCardsByCity from './offer-cards-by-city/offer-cards-by-city';
-import { getFavoriteOffersByCity } from '../../utils/common';
-import { Offers } from '../../types/types';
+import Header from '../components/header';
+import FavoritesListByCity from '../components/favorites-list-by-city';
+import { getFavoriteOffersByCity } from '../utils/common';
+import { Offers } from '../types/types';
 
 type FavoritesPageProps = {
   offers: Offers;
@@ -21,7 +21,7 @@ export default function FavoritesPage(props: FavoritesPageProps): JSX.Element {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {Object.keys(favoriteOffersByCity).map((city) => (
-                <OfferCardsByCity key={Date.now() + Math.random()} favoriteOffers={favoriteOffersByCity[city]} />
+                <FavoritesListByCity key={Date.now() + Math.random()} favoriteOffers={favoriteOffersByCity[city]} />
               ))}
             </ul>
           </section>

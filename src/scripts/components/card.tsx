@@ -1,13 +1,13 @@
 import React from 'react';
-import { Offer } from '../../../types/types';
+import { Offer } from '../types/types';
 
-type OfferCardProps = {
+type CardProps = {
   offer: Offer;
   handleOfferMouseEnter: (offer: Offer) => void;
   handleOfferMouseLeave: () => void;
 };
 
-export default function OfferCard(props: OfferCardProps): JSX.Element {
+export default function Card(props: CardProps): JSX.Element {
   const { offer, handleOfferMouseEnter, handleOfferMouseLeave } = props;
   const { isPremium, image, price, isFavorite, rating, name, type } = offer;
 

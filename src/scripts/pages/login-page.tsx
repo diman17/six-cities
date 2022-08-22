@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import useInput from '../../hooks/useInput';
+import useInput from '../hooks/useInput';
 
 type CustomState = {
   from: { pathname: string };
