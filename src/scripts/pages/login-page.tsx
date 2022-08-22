@@ -1,8 +1,8 @@
 import React, { FormEvent } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 
-type CustomState = {
+type locationState = {
   from: { pathname: string };
 };
 
@@ -16,7 +16,7 @@ export default function LoginPage(props: LoginPageProps): JSX.Element {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const state = location.state as CustomState;
+  const state = location.state as locationState;
   const from = state?.from?.pathname || '/';
 
   const [emailValue, handleEmailChange] = useInput();
@@ -36,9 +36,9 @@ export default function LoginPage(props: LoginPageProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="/">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -78,13 +78,7 @@ export default function LoginPage(props: LoginPageProps): JSX.Element {
               </button>
             </form>
           </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
-            </div>
-          </section>
+          <div className="locations locations--login locations--current" />
         </div>
       </main>
     </div>

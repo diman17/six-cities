@@ -1,31 +1,15 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Offers } from './types/types';
 import FavoritesPage from './pages/favorites-page';
 import LoginPage from './pages/login-page';
 import MainPage from './pages/main-page';
 import PropertyPage from './pages/property-page';
+import WithRequireAuth from './hocs/with-require-auth';
 
 type AppProps = {
   offers: Offers;
 };
-
-type RequireAuthProps = {
-  authStatus: boolean;
-  children: JSX.Element;
-};
-
-function RequireAuth(props: RequireAuthProps) {
-  const { authStatus, children } = props;
-
-  const location = useLocation();
-
-  if (!authStatus) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  return children;
-}
 
 export default function App(props: AppProps): JSX.Element {
   const { offers } = props;
@@ -40,12 +24,13 @@ export default function App(props: AppProps): JSX.Element {
         <Route
           path="/favorites"
           element={
-            <RequireAuth authStatus={authStatus}>
+            <WithRequireAuth authStatus={authStatus}>
               <FavoritesPage offers={offers} />
-            </RequireAuth>
+            </WithRequireAuth>
           }
         />
         <Route path="/offer/:id" element={<PropertyPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -4,6 +4,8 @@ import { HoveredOffer, Offer, Offers } from '../types/types';
 import Map from '../components/map';
 import { getOffersCity } from '../utils/common';
 import Card from '../components/card';
+import CityList from '../components/location-list';
+import CITIES from '../utils/constants';
 
 type MainPageProps = {
   offers: Offers;
@@ -12,10 +14,10 @@ type MainPageProps = {
 export default function MainPage(props: MainPageProps): JSX.Element {
   const { offers } = props;
 
-  const currentCity = 'Amsterdam';
-  const offersCity = getOffersCity(currentCity, offers);
-
   const [hoveredOffer, setHoveredOffer] = useState<HoveredOffer>(null);
+  const [currentCity, setCurrentCity] = useState<string>(CITIES[3]);
+
+  const offersCity = getOffersCity(currentCity, offers);
 
   const handleOfferMouseEnter = (offer: Offer): void => {
     setHoveredOffer(offer);
@@ -32,38 +34,7 @@ export default function MainPage(props: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CityList cities={CITIES} currentCity={currentCity} setCurrentCity={setCurrentCity} />
           </section>
         </div>
         <div className="cities">
@@ -111,7 +82,7 @@ export default function MainPage(props: MainPageProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offersCity} city={offersCity[0].city} hoveredOffer={hoveredOffer} />
+                {/* <Map offers={offersCity} city={offersCity[0].city} hoveredOffer={hoveredOffer} /> */}
               </section>
             </div>
           </div>
