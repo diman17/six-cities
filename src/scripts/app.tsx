@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Offers } from './types/types';
 import FavoritesPage from './pages/favorites-page';
 import LoginPage from './pages/login-page';
 import MainPage from './pages/main-page';
 import PropertyPage from './pages/property-page';
 import WithRequireAuth from './hocs/with-require-auth';
+import offers from './mocks/offers';
 
-type AppProps = {
-  offers: Offers;
-};
-
-export default function App(props: AppProps): JSX.Element {
-  const { offers } = props;
-
-  const [authStatus, setAuthStatus] = useState(false);
+export default function App(): JSX.Element {
+  const [authStatus, setAuthStatus] = useState(true);
 
   return (
     <BrowserRouter>

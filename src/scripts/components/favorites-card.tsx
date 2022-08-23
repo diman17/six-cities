@@ -7,7 +7,7 @@ type FavoritesCardProps = {
 
 export default function FavoritesCard(props: FavoritesCardProps) {
   const { offer } = props;
-  const { isPremium, image, price, rating, name, type } = offer;
+  const { isPremium, previewImage, price, rating, title, type } = offer;
 
   return (
     <article className="favorites__card place-card">
@@ -18,7 +18,7 @@ export default function FavoritesCard(props: FavoritesCardProps) {
       )}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={image} width="150" height="110" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
         </a>
       </div>
       <div className="favorites__card-info place-card__info">
@@ -41,7 +41,7 @@ export default function FavoritesCard(props: FavoritesCardProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{name}</a>
+          <a href="#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

@@ -1,11 +1,4 @@
-import { Offers } from '../types/types';
-
-export type FavoriteOffersByCity = {
-  [key: string]: {
-    cityName: string;
-    offers: Offers;
-  };
-};
+import { FavoriteOffersByCity, Offers } from '../types/types';
 
 export const getFavoriteOffersByCity = (offers: Offers): FavoriteOffersByCity => {
   const cities = new Set<string>();
@@ -31,5 +24,5 @@ export const getFavoriteOffersByCity = (offers: Offers): FavoriteOffersByCity =>
   return result;
 };
 
-export const getOffersCity = (city: string, offers: Offers): Offers =>
+export const getOffersByCity = (city: string, offers: Offers): Offers =>
   offers.filter((offer) => offer.city.name === city);

@@ -1,7 +1,8 @@
 import React from 'react';
+import { City } from '../types/types';
 
 type CityListProps = {
-  cities: string[];
+  cities: City[];
   currentCity: string;
   setCurrentCity: (city: string) => void;
 };
@@ -17,19 +18,19 @@ export default function CityList(props: CityListProps) {
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city) => {
-        if (city === currentCity) {
+        if (city.name === currentCity) {
           return (
-            <li key={city} className="locations__item">
+            <li key={city.name} className="locations__item">
               <a className="locations__item-link tabs__item tabs__item--active">
-                <span>{city}</span>
+                <span>{city.name}</span>
               </a>
             </li>
           );
         }
         return (
-          <li key={city} className="locations__item">
-            <a onClick={handleClick(city)} className="locations__item-link tabs__item">
-              <span>{city}</span>
+          <li key={city.name} className="locations__item">
+            <a onClick={handleClick(city.name)} className="locations__item-link tabs__item">
+              <span>{city.name}</span>
             </a>
           </li>
         );

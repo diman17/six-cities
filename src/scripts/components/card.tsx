@@ -9,7 +9,7 @@ type CardProps = {
 
 export default function Card(props: CardProps): JSX.Element {
   const { offer, handleOfferMouseEnter, handleOfferMouseLeave } = props;
-  const { isPremium, image, price, isFavorite, rating, name, type } = offer;
+  const { isPremium, previewImage, price, isFavorite, rating, title, type } = offer;
 
   return (
     <article
@@ -24,7 +24,7 @@ export default function Card(props: CardProps): JSX.Element {
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -56,7 +56,7 @@ export default function Card(props: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{name}</a>
+          <a href="#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

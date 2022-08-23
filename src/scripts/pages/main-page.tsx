@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Header from '../components/header';
 import { HoveredOffer, Offer, Offers } from '../types/types';
 import Map from '../components/map';
-import { getOffersCity } from '../utils/common';
+import { getOffersByCity } from '../utils/common';
 import Card from '../components/card';
-import CityList from '../components/location-list';
-import CITIES from '../utils/constants';
+import CityList from '../components/city-list';
+import { CITIES } from '../constants';
 
 type MainPageProps = {
   offers: Offers;
@@ -15,9 +15,9 @@ export default function MainPage(props: MainPageProps): JSX.Element {
   const { offers } = props;
 
   const [hoveredOffer, setHoveredOffer] = useState<HoveredOffer>(null);
-  const [currentCity, setCurrentCity] = useState<string>(CITIES[3]);
+  const [currentCity, setCurrentCity] = useState<string>(CITIES[3].name);
 
-  const offersCity = getOffersCity(currentCity, offers);
+  const offersByCity = getOffersByCity(currentCity, offers);
 
   const handleOfferMouseEnter = (offer: Offer): void => {
     setHoveredOffer(offer);
@@ -42,7 +42,7 @@ export default function MainPage(props: MainPageProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {offersCity.length} places to stay in {currentCity}
+                {offersByCity.length} places to stay in {currentCity}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -68,7 +68,7 @@ export default function MainPage(props: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offersCity.map(
+                {offersByCity.map(
                   (offer): JSX.Element => (
                     <Card
                       key={offer.id}
@@ -82,7 +82,7 @@ export default function MainPage(props: MainPageProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                {/* <Map offers={offersCity} city={offersCity[0].city} hoveredOffer={hoveredOffer} /> */}
+                <Map offersByCity={offersByCity} hoveredOffer={hoveredOffer} />
               </section>
             </div>
           </div>
