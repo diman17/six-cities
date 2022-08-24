@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Header from '../components/header';
-import { HoveredOffer, Offer, Offers } from '../types/types';
+import { Offer, Offers } from '../types/types';
 import Map from '../components/map';
 import { getOffersByCity } from '../utils/common';
 import Card from '../components/card';
 import CityList from '../components/city-list';
 import { CITIES } from '../constants';
+import useHover from '../hooks/useHover';
 
 type MainPageProps = {
   offers: Offers;
@@ -13,19 +14,10 @@ type MainPageProps = {
 
 export default function MainPage(props: MainPageProps): JSX.Element {
   const { offers } = props;
+  const [hoveredOffer, handleOfferMouseEnter, handleOfferMouseLeave] = useHover<Offer>();
 
-  const [hoveredOffer, setHoveredOffer] = useState<HoveredOffer>(null);
   const [currentCity, setCurrentCity] = useState<string>(CITIES[3].name);
-
   const offersByCity = getOffersByCity(currentCity, offers);
-
-  const handleOfferMouseEnter = (offer: Offer): void => {
-    setHoveredOffer(offer);
-  };
-
-  const handleOfferMouseLeave = (): void => {
-    setHoveredOffer(null);
-  };
 
   return (
     <div className="page page--gray page--main">
