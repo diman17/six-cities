@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import Header from '../components/header';
-import { Offer, Offers } from '../types/types';
+import { Offer, Offers } from '../types/offers';
 import Map from '../components/map';
 import { getOffersByCity } from '../utils/common';
 import Card from '../components/card';
 import CityList from '../components/city-list';
 import { CITIES } from '../constants';
 import useHover from '../hooks/useHover';
+import { State } from '../types/store';
+
+const mapState = (state: State) => ({
+  currentCity: state.currentCity,
+});
+
+const connector = connect(mapState);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type MainPageProps = {
   offers: Offers;
-};
+} & PropsFromRedux;
 
-export default function MainPage(props: MainPageProps): JSX.Element {
-  const { offers } = props;
+function MainPage(props: MainPageProps): JSX.Element {
+  const { offers, currentCity } = props;
   const [hoveredOffer, handleOfferMouseEnter, handleOfferMouseLeave] = useHover<Offer>();
-
-  const [currentCity, setCurrentCity] = useState<string>(CITIES[3].name);
   const offersByCity = getOffersByCity(currentCity, offers);
 
   return (
@@ -26,7 +34,7 @@ export default function MainPage(props: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CityList cities={CITIES} currentCity={currentCity} setCurrentCity={setCurrentCity} />
+            <CityList cities={CITIES} currentCity={currentCity} />
           </section>
         </div>
         <div className="cities">
@@ -83,3 +91,5 @@ export default function MainPage(props: MainPageProps): JSX.Element {
     </div>
   );
 }
+
+export default connector(MainPage);

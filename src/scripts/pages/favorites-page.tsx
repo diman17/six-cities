@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/header';
 import FavoritesListByCity from '../components/favorites-list-by-city';
 import { getFavoriteOffersByCity } from '../utils/common';
-import { Offers } from '../types/types';
+import { Offers } from '../types/offers';
 
 type FavoritesPageProps = {
   offers: Offers;

@@ -1,4 +1,4 @@
-import { FavoriteOffersByCity, Offers } from '../types/types';
+import { FavoriteOffersByCity, Offers } from '../types/offers';
 
 export const getFavoriteOffersByCity = (offers: Offers): FavoriteOffersByCity => {
   const cities = new Set<string>();

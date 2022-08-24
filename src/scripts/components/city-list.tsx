@@ -1,13 +1,25 @@
-import React from 'react';
-import { City } from '../types/types';
+import React, { Dispatch } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import { changeCurrentCity } from '../store/actions';
+import { City } from '../types/offers';
+import { Actions } from '../types/store';
+
+const mapDispatch = (dispatch: Dispatch<Actions>) => ({
+  setCurrentCity(city: string) {
+    dispatch(changeCurrentCity(city));
+  },
+});
+
+const connector = connect(null, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type CityListProps = {
   cities: City[];
   currentCity: string;
-  setCurrentCity: (city: string) => void;
-};
+} & PropsFromRedux;
 
-export default function CityList(props: CityListProps) {
+function CityList(props: CityListProps) {
   const { cities, currentCity, setCurrentCity } = props;
 
   const handleClick = (city: string) => (event: React.MouseEvent) => {
@@ -38,3 +50,5 @@ export default function CityList(props: CityListProps) {
     </ul>
   );
 }
+
+export default connector(CityList);

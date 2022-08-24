@@ -1,5 +1,5 @@
 import React from 'react';
-import { Offers } from '../types/types';
+import { Offers } from '../types/offers';
 import FavoritesCard from './favorites-card';
 
 type FavoritesListByCityProps = {

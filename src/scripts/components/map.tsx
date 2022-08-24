@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Icon, LatLngExpression, Marker } from 'leaflet';
-import { HoveredOffer, Offers } from '../types/types';
+import { HoveredOffer, Offers } from '../types/offers';
 import useMap from '../hooks/useMap';
 
 type MapProps = {

@@ -29,6 +29,7 @@
     "no-undef": 0,
     "no-shadow": 0,
     "no-plusplus": 0,
+    "default-param-last": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".tsx"] }],
     "import/extensions": [2, { "tsx": "never" }]
   }
