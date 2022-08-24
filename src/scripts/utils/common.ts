@@ -1,3 +1,4 @@
+import { sortType } from '../constants';
 import { FavoriteOffersByCity, Offers } from '../types/offers';
 
 export const getFavoriteOffersByCity = (offers: Offers): FavoriteOffersByCity => {
@@ -26,3 +27,19 @@ export const getFavoriteOffersByCity = (offers: Offers): FavoriteOffersByCity =>
 
 export const getOffersByCity = (city: string, offers: Offers): Offers =>
   offers.filter((offer) => offer.city.name === city);
+
+export const getSortedOffers = (offers: Offers, type = sortType.popular) => {
+  const sortedOffers = [...offers];
+  switch (type) {
+    case sortType.popular:
+      return offers;
+    case sortType.lowToHigh:
+      return sortedOffers.sort((a, b) => a.price - b.price);
+    case sortType.highToLow:
+      return sortedOffers.sort((a, b) => b.price - a.price);
+    case sortType.topRated:
+      return sortedOffers.sort((a, b) => a.rating - b.rating);
+    default:
+      return offers;
+  }
+};

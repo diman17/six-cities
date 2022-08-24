@@ -61,3 +61,12 @@ export const goods = [
 ];
 
 export const type = ['Apartment', 'Private room', 'House', 'Hotel'];
+
+export const sortType: {
+  [key: string]: string;
+} = {
+  popular: 'Popular',
+  lowToHigh: 'Price: low to high',
+  highToLow: 'Price: high to low',
+  topRated: 'Top rated first',
+};
