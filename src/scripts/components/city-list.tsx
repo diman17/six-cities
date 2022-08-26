@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
-import { changeCurrentCity } from '../store/actions';
+import { changeCurrentCity, changeOffersByCurrentCity } from '../store/actions';
 import { City, Offers } from '../types/offers';
 import { Actions, State } from '../types/store';
-import { getOffersByCity, getSortedOffers } from '../utils/common';
 
 const mapState = (state: State) => ({
   currentSortType: state.currentSortType,
@@ -15,6 +14,9 @@ const mapDispatch = (dispatch: Dispatch<Actions>) => ({
   setCurrentCity(city: string) {
     dispatch(changeCurrentCity(city));
   },
+  changeOffersByCurrentCity(currentCity: string, offers: Offers, sort: string) {
+    dispatch(changeOffersByCurrentCity(currentCity, offers, sort));
+  },
 });
 
 const connector = connect(mapState, mapDispatch);
@@ -23,17 +25,16 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type CityListProps = {
   cities: City[];
-  setOffersByCity: (offers: Offers) => void;
   offers: Offers;
 } & PropsFromRedux;
 
 function CityList(props: CityListProps) {
-  const { cities, offers, currentSortType, setOffersByCity, currentCity, setCurrentCity } = props;
+  const { cities, offers, currentSortType, currentCity, setCurrentCity, changeOffersByCurrentCity } = props;
 
   const handleClick = (city: string) => (event: React.MouseEvent) => {
     event.preventDefault();
     setCurrentCity(city);
-    setOffersByCity(getSortedOffers(getOffersByCity(city, offers), currentSortType));
+    changeOffersByCurrentCity(city, offers, currentSortType);
   };
 
   return (

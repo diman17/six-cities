@@ -2,18 +2,23 @@ import React, { MutableRefObject, useRef, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
 import { sortType } from '../constants';
-import { changeCurrentSortType } from '../store/actions';
+import offers from '../mocks/offers';
+import { changeCurrentSortType, changeOffersByCurrentCity } from '../store/actions';
 import { Offers } from '../types/offers';
 import { Actions, State } from '../types/store';
-import { getSortedOffers } from '../utils/common';
 
 const mapState = (state: State) => ({
+  currentCity: state.currentCity,
   currentSortType: state.currentSortType,
+  offersByCurrentCity: state.offersByCurrentCity,
 });
 
 const mapDispatch = (dispatch: Dispatch<Actions>) => ({
   onChangeSortType(sort: string) {
     dispatch(changeCurrentSortType(sort));
+  },
+  changeOffersByCurrentCity(currentCity: string, offers: Offers, sort: string) {
+    dispatch(changeOffersByCurrentCity(currentCity, offers, sort));
   },
 });
 
@@ -21,13 +26,8 @@ const connector = connect(mapState, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-type SortingProps = {
-  setOffersByCity: (offers: Offers) => void;
-  offersByCity: Offers;
-} & PropsFromRedux;
-
-function Sorting(props: SortingProps) {
-  const { offersByCity, setOffersByCity, currentSortType, onChangeSortType } = props;
+function Sorting(props: PropsFromRedux) {
+  const { currentCity, changeOffersByCurrentCity, currentSortType, onChangeSortType } = props;
   const [isListOpened, setIsListOpened] = useState(false);
   const listRef: MutableRefObject<HTMLUListElement | null> = useRef(null);
   const optionActiveRef: MutableRefObject<HTMLLIElement | null> = useRef(null);
@@ -47,7 +47,7 @@ function Sorting(props: SortingProps) {
     onChangeSortType(type);
     listRef.current?.classList.remove('places__options--opened');
     setIsListOpened(false);
-    setOffersByCity(getSortedOffers(offersByCity, type));
+    changeOffersByCurrentCity(currentCity, offers, type);
   };
 
   return (
