@@ -3,7 +3,9 @@ import { connect, ConnectedProps } from 'react-redux';
 import { Dispatch } from 'redux';
 import { sortType } from '../constants';
 import { changeCurrentSortType } from '../store/actions';
+import { Offers } from '../types/offers';
 import { Actions, State } from '../types/store';
+import { getSortedOffers } from '../utils/common';
 
 const mapState = (state: State) => ({
   currentSortType: state.currentSortType,
@@ -19,8 +21,13 @@ const connector = connect(mapState, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-function Sorting(props: PropsFromRedux) {
-  const { currentSortType, onChangeSortType } = props;
+type SortingProps = {
+  setOffersByCity: (offers: Offers) => void;
+  offersByCity: Offers;
+} & PropsFromRedux;
+
+function Sorting(props: SortingProps) {
+  const { offersByCity, setOffersByCity, currentSortType, onChangeSortType } = props;
   const [isListOpened, setIsListOpened] = useState(false);
   const listRef: MutableRefObject<HTMLUListElement | null> = useRef(null);
   const optionActiveRef: MutableRefObject<HTMLLIElement | null> = useRef(null);
@@ -40,6 +47,7 @@ function Sorting(props: PropsFromRedux) {
     onChangeSortType(type);
     listRef.current?.classList.remove('places__options--opened');
     setIsListOpened(false);
+    setOffersByCity(getSortedOffers(offersByCity, type));
   };
 
   return (

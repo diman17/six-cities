@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Header from '../components/header';
 import { Offer, Offers } from '../types/offers';
@@ -26,7 +26,8 @@ type MainPageProps = {
 function MainPage(props: MainPageProps): JSX.Element {
   const { offers, currentCity } = props;
   const [hoveredOffer, handleOfferMouseEnter, handleOfferMouseLeave] = useHover<Offer>();
-  const offersByCity = getOffersByCity(currentCity, offers);
+  const [offersByCity, setOfferrsByCity] = useState<Offers>(getOffersByCity(currentCity, offers));
+
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -34,7 +35,7 @@ function MainPage(props: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CityList cities={CITIES} currentCity={currentCity} />
+            <CityList cities={CITIES} offers={offers} setOffersByCity={setOfferrsByCity} />
           </section>
         </div>
         <div className="cities">
@@ -44,7 +45,7 @@ function MainPage(props: MainPageProps): JSX.Element {
               <b className="places__found">
                 {offersByCity.length} places to stay in {currentCity}
               </b>
-              <Sorting />
+              <Sorting offersByCity={offersByCity} setOffersByCity={setOfferrsByCity} />
               <div className="cities__places-list places__list tabs__content">
                 {offersByCity.map(
                   (offer): JSX.Element => (

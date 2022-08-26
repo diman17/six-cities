@@ -38,7 +38,7 @@ export const getSortedOffers = (offers: Offers, type = sortType.popular) => {
     case sortType.highToLow:
       return sortedOffers.sort((a, b) => b.price - a.price);
     case sortType.topRated:
-      return sortedOffers.sort((a, b) => a.rating - b.rating);
+      return sortedOffers.sort((a, b) => b.rating - a.rating);
     default:
       return offers;
   }
